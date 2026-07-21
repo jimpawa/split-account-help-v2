@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>betPawa — Smart Help Prototype</title>
+<link rel="stylesheet" href="app/colors_and_type.css?v=1" />
+<link rel="stylesheet" href="app/components.css?v=1" />
+<link rel="stylesheet" href="app/ssot.css?v=1" />
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#16191B"/>
+    <rect x="30" y="20" width="40" height="60" rx="8" fill="#252A2D" stroke="#9CE800" stroke-width="2"/>
+    <circle cx="50" cy="38" r="8" fill="#9CE800"/>
+    <rect x="38" y="52" width="24" height="4" rx="2" fill="#9CE800"/>
+    <rect x="38" y="60" width="16" height="4" rx="2" fill="#7A8185"/>
+  </svg>
+</template>
+</head>
+<body>
+<div id="sprite-host" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></div>
+<div id="root"></div>
+
+<script>
+  /* Inline the official pawaIconZ sprite so #pIcon-* refs resolve in-document. */
+  window.__spriteReady = fetch("app/sprite.svg?v=1")
+    .then(function (r) { return r.text(); })
+    .then(function (t) { document.getElementById("sprite-host").innerHTML = t; })
+    .catch(function (e) { console.warn("sprite load failed", e); });
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="app/image-slot.js?v=1"></script>
+<script src="app/data.js?v=1"></script>
+<script type="text/babel" src="app/ui.jsx?v=1"></script>
+<script type="text/babel" src="app/screens.jsx?v=1"></script>
+<script type="text/babel" src="app/screens2.jsx?v=1"></script>
+<script type="text/babel" src="app/app.jsx?v=1"></script>
+</body>
+</html>

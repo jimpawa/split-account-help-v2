@@ -1,0 +1,522 @@
+/* pawabloX Design System — Colors & Type
+ * Source of truth: github.com/AlienGain/pawablox-design-system
+ *   packages/tokens/scss/vars/_colors.scss   (raw scales)
+ *   packages/tokens/scss/vars/_theme.css     (semantic light/dark)
+ *   packages/tokens/scss/vars/_typography.scss / _spacing.scss / _shadows.scss
+ *   packages/icons/src/icons/                (138 IconXxx — bundled into assets/icons/sprite.svg)
+ * Brand color: #9CE800 (Brand 500 — pawa lime)
+ */
+
+/* ─────────── Local Roboto fonts ───────────
+ * Product UI uses Regular 400 + Bold 700 only — served by dedicated static
+ * files the brand team uploaded. The variable font remains for any
+ * intermediate weight / width still referenced by legacy tokens.
+ */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Roboto-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/Roboto-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url('fonts/Roboto-VariableFont_wdth_wght.ttf') format('truetype-variations'),
+       url('fonts/Roboto-VariableFont_wdth_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url('fonts/Roboto-Italic-VariableFont_wdth_wght.ttf') format('truetype-variations'),
+       url('fonts/Roboto-Italic-VariableFont_wdth_wght.ttf') format('truetype');
+}
+
+:root {
+  /* ═══════════ RAW PALETTES (verbatim from _colors.scss) ═══════════ */
+
+  /* ─── Brand (pawa lime) — values from $colors-brand-* ─── */
+  --brand-50:  #F5FEE4;
+  --brand-100: #ECFCCB;
+  --brand-200: #DDFAA5;
+  --brand-300: #C8F769;
+  --brand-400: #B2F42C;
+  --brand-500: #9CE800; /* primary brand */
+  --brand-600: #8DC63F; /* accent / hover */
+  --brand-700: #76AC08;
+  --brand-800: #5B8506;
+  --brand-900: #3D5904;
+
+  /* ─── Neutral (slate) — values from $colors-neutral-* ─── */
+  --neutral-50:  #FFFFFF;  /* the system uses 50 = pure white */
+  --neutral-100: #F2F2F3;
+  --neutral-200: #E4E6E7;
+  --neutral-300: #CACDCE;
+  --neutral-400: #AAAEB0;
+  --neutral-500: #7A8185;
+  --neutral-600: #484F52;
+  --neutral-700: #2F3437;
+  --neutral-800: #252A2D;
+  --neutral-900: #171A1C;
+
+  /* ─── Semantic — Orange ─── */
+  --orange-50:  #FFF5E6;
+  --orange-100: #FFE3BF;
+  --orange-200: #FFCD94;
+  --orange-300: #FFB366;
+  --orange-400: #FF9940;
+  --orange-500: #FF7A00;
+  --orange-600: #CC6200;
+  --orange-700: #994900;
+  --orange-800: #813D00;
+  --orange-900: #633000;
+
+  /* ─── Semantic — Purple ─── */
+  --purple-50:  #F3E8FD;
+  --purple-100: #E6D1FB;
+  --purple-200: #CDA3F8;
+  --purple-300: #B576F4;
+  --purple-400: #9C48F1;
+  --purple-500: #831AED;
+  --purple-600: #6915BE;
+  --purple-700: #4F108E;
+  --purple-800: #430B7A;
+  --purple-900: #340A5F;
+
+  /* ─── Semantic — Teal ─── */
+  --teal-50:  #E9F8FB;
+  --teal-100: #D3F2F8;
+  --teal-200: #A6E6F1;
+  --teal-300: #7AD9EA;
+  --teal-400: #4DCDE3;
+  --teal-500: #22BFDB;
+  --teal-600: #1CA4BA;
+  --teal-700: #158599;
+  --teal-800: #0F6578;
+  --teal-900: #0A4B5A;
+
+  /* ─── Semantic — Yellow ─── */
+  --yellow-50:  #FFF9E6;
+  --yellow-100: #FFEEC2;
+  --yellow-200: #FFE192;
+  --yellow-300: #FFD161;
+  --yellow-400: #FFC133;
+  --yellow-500: #FEBA0C;
+  --yellow-600: #DB9C08;
+  --yellow-700: #B57F05;
+  --yellow-800: #8C6103;
+  --yellow-900: #684902;
+
+  /* ─── Semantic — Red ─── */
+  --red-50:  #FFF1EE;
+  --red-100: #FFDAD4;
+  --red-200: #FFB7AA;
+  --red-300: #FF8B76;
+  --red-400: #F86147;
+  --red-500: #CC371B;
+  --red-600: #B02F17;
+  --red-700: #8E2613;
+  --red-800: #6B1D0F;
+  --red-900: #50160B;
+
+  /* ═══════════ SEMANTIC LAYER (verbatim from _theme.css :root / [data-theme=light]) ═══════════ */
+  /* These are the names you should actually consume from product code. */
+
+  /* Background */
+  --c-bg-default:                  #F2F2F3;   /* neutral-100 */
+  --c-bg-secondary:                #FFFFFF;   /* neutral-50 — cards / sheets */
+  --c-bg-tertiary:                 #E4E6E7;   /* neutral-200 — subdued surfaces */
+  --c-bg-inverse-default:          #252A2D;   /* neutral-800 — bottom-nav, dark surfaces */
+  --c-bg-inverse-secondary:        #2F3437;   /* neutral-700 */
+  --c-bg-disabled-default:         #E4E6E7;
+  --c-bg-disabled-secondary:       #7A8185;
+  --c-bg-brand-default:            #9CE800;   /* brand-500 */
+  --c-bg-brand-accent:             #8DC63F;   /* brand-600 */
+  --c-bg-secondary-brand-default:  #FF7A00;   /* orange-500 — secondary brand */
+  --c-bg-secondary-brand-accent:   #CC6200;
+  --c-bg-tertiary-brand-default:   #831AED;   /* purple-500 — tertiary brand (promos) */
+  --c-bg-inverse-brand-accent:     #3D5904;   /* brand-900 — chip on dark bg */
+
+  --c-bg-success:                  #ECFCCB;   /* brand-100 */
+  --c-bg-error:                    #FFDAD4;   /* red-100 */
+  --c-bg-error-background:         #FFDAD4;
+  --c-bg-warning:                  #FFE3BF;   /* orange-100 */
+  --c-bg-info:                     #D3F2F8;   /* teal-100 */
+  --c-bg-alternative:              #E6D1FB;   /* purple-100 */
+  --c-bg-alert:                    #CC371B;   /* red-500 — solid alert chip */
+
+  /* Border */
+  --c-border-default:              #E4E6E7;
+  --c-border-secondary:            #AAAEB0;
+  --c-border-tertiary:             #252A2D;
+  --c-border-inverse-default:      #2F3437;
+  --c-border-inverse-secondary:    #484F52;
+  --c-border-accent:               #3D5904;
+  --c-border-success:              #9CE800;
+  --c-border-error:                #FF8B76;
+  --c-border-warning:              #FFCD94;
+  --c-border-info:                 #7AD9EA;
+  --c-border-alternative:          #CDA3F8;
+
+  /* Text */
+  --c-text-primary:                #252A2D;   /* neutral-800 */
+  --c-text-secondary:              #7A8185;   /* neutral-500 */
+  --c-text-disabled:               #AAAEB0;
+  --c-text-primary-inverse:        #FFFFFF;
+  --c-text-secondary-inverse:      #AAAEB0;
+  --c-text-on-brand:               #252A2D;   /* dark text on lime */
+  --c-text-brand:                  #9CE800;
+  --c-text-brand-accent:           #8DC63F;
+  --c-text-brand-dark:             #8DC63F;
+  --c-text-success:                #5B8506;
+  --c-text-error:                  #CC371B;
+  --c-text-warning:                #FF7A00;
+
+  /* Icon */
+  --c-icon-primary:                #252A2D;
+  --c-icon-secondary:              #7A8185;
+  --c-icon-on-brand:               #252A2D;
+  --c-icon-brand:                  #9CE800;
+  --c-icon-brand-accent:           #76AC08;
+  --c-icon-success:                #9CE800;
+  --c-icon-success-accent:         #5B8506;
+  --c-icon-error:                  #CC371B;
+  --c-icon-warning:                #FF7A00;
+  --c-icon-info:                   #22BFDB;
+  --c-icon-alternative:            #6915BE;
+  --c-icon-disabled-on-default:    #CACDCE;
+  --c-icon-disabled-on-surface:    #AAAEB0;
+
+  /* Buttons */
+  --c-btn-primary-bg-default:      #9CE800;
+  --c-btn-primary-bg-hover:        #8DC63F;
+  --c-btn-primary-bg-disabled:     #E4E6E7;
+  --c-btn-secondary-bg-default:    #252A2D;
+  --c-btn-secondary-bg-hover:      #484F52;
+  --c-btn-secondary-bg-disabled:   #484F52;
+  --c-btn-tonal-bg-default:        #E4E6E7;
+  --c-btn-tonal-bg-hover:          #CACDCE;
+  --c-btn-tonal-bg-disabled:       #E4E6E7;
+  --c-btn-inverse-bg-default:      #2F3437;
+  --c-btn-inverse-bg-hover:        #484F52;
+  --c-btn-inverse-border:          #484F52;
+  --c-btn-outline-default:         #252A2D;
+  --c-btn-outline-hover:           #171A1C;
+  --c-btn-outline-disabled:        #7A8185;
+
+  /* Badges */
+  --c-badge-primary:               #9CE800;
+  --c-badge-secondary:              #CACDCE;
+  --c-badge-inverse:               #171A1C;
+  --c-badge-inverse-secondary:     #171A1C;
+  --c-badge-outline:               #FFFFFF;
+  --c-badge-outline-border:        #E4E6E7;
+  --c-badge-warning:               #FFCD94;
+  --c-badge-destructive:           #CC371B;
+  --c-badge-alternative:           #831AED;
+
+  /* Inputs */
+  --c-input-bg:                    #FFFFFF;
+  --c-input-bg-disabled:           #E4E6E7;       /* neutral-200 — disabled fill */
+  --c-input-bg-prefix:             #F2F2F3;       /* neutral-100 — prefix chip / currency selector / dial-code button */
+  --c-input-border-default:        #E4E6E7;       /* neutral-200 */
+  --c-input-border-focus:          #7AD9EA;       /* teal-300 */
+  --c-input-border-error:          #FF8B76;       /* red-300 */
+  --c-input-border-success:        #9CE800;       /* brand-500 */
+  --c-input-border-disabled:       #F2F2F3;       /* neutral-100 */
+  --c-input-text:                  #252A2D;       /* filled value */
+  --c-input-placeholder:           #7A8185;       /* neutral-500 */
+  --c-input-placeholder-disabled:  #AAAEB0;       /* neutral-400 */
+  --c-input-label:                 #252A2D;
+  --c-input-help:                  #7A8185;
+  --c-input-help-error:            #CC371B;       /* red-500 */
+
+  /* USP gradient (homepage promo wash) */
+  --c-usp-bg-0:                    #E5FDC900;
+  --c-usp-bg-90:                   #E5FDC9E6;
+
+  /* ═══════════ NON-COLOR TOKENS ═══════════ */
+
+  /* Radii — from _other.scss (radius-rounded-*) */
+  --radius-xxs:    2px;   /* rounded-sm */
+  --radius-xs:     4px;   /* rounded */
+  --radius-sm:     6px;   /* rounded-md */
+  --radius-md:     8px;   /* rounded-lg → button, input, bet-button */
+  --radius-lg:     12px;  /* rounded-xl → card, badge */
+  --radius-xl:     16px;  /* rounded-2xl */
+  --radius-2xl:    24px;  /* rounded-3xl */
+  --radius-3xl:    32px;  /* rounded-4xl */
+  --radius-full:   9999px;
+  /* aliases for legacy preview cards */
+  --radius-pill:   9999px;
+
+  /* Spacing — 4px base (rem-based in source: 1rem = 16px) */
+  --space-0:    0;
+  --space-0-5:  2px;
+  --space-1:    4px;
+  --space-1-5:  6px;
+  --space-2:    8px;
+  --space-2-5:  10px;
+  --space-3:    12px;
+  --space-3-5:  14px;
+  --space-4:    16px;
+  --space-5:    20px;
+  --space-6:    24px;
+  --space-7:    28px;
+  --space-8:    32px;
+  --space-10:   40px;
+  --space-12:   48px;
+  --space-14:   56px;
+  --space-16:   64px;
+  --space-20:   80px;
+  --space-24:   96px;
+
+  /* Semantic spacing aliases */
+  --space-xxxs:  var(--space-0-5);
+  --space-xxs:   var(--space-1);
+  --space-xs:    var(--space-2);
+  --space-sm:    var(--space-3);
+  --space-md:    var(--space-4);
+  --space-lg:    var(--space-5);
+  --space-xl:    var(--space-6);
+  --space-2xl:   var(--space-8);
+  --space-3xl:   var(--space-10);
+
+  /* Borders */
+  --border-1:    1px;
+  --border-2:    2px;
+  --border-4:    4px;
+
+  /* Elevation — from _shadows.scss + drop-shadow rgba refs */
+  --shadow-2xs: 0 1px 0 0 rgba(0,0,0,.05);
+  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,.05);
+  --shadow-sm:  0 1px 3px 0 rgba(0,0,0,.10), 0 1px 2px -1px rgba(0,0,0,.10);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -2px rgba(0,0,0,.10);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,.10), 0 4px 6px -4px rgba(0,0,0,.10);
+  --shadow-xl:  0 20px 25px -5px rgba(0,0,0,.10), 0 8px 10px -6px rgba(0,0,0,.10);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.25);
+
+  /* Type — Roboto from _typography.scss */
+  --font-sans:   'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:   ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* size / line-height pairs (px values from -font-size / -line-height) */
+  --text-xxs:    10px;  --lh-xxs:   12px;
+  --text-xs:     12px;  --lh-xs:    16px;
+  --text-sm:     14px;  --lh-sm:    16px;
+  --text-base:   16px;  --lh-base:  20px;
+  --text-lg:     18px;  --lh-lg:    24px;
+  --text-xl:     20px;  --lh-xl:    28px;
+  --text-2xl:    24px;  --lh-2xl:   32px;
+  --text-3xl:    30px;  --lh-3xl:   36px;
+  --text-4xl:    36px;  --lh-4xl:   40px;
+  --text-5xl:    48px;  --lh-5xl:   48px;
+  /* legacy alias used by older preview cards */
+  --text-xxl:    24px;  --lh-xxl:   32px;
+  --text-display:48px;  --lh-display: 48px;
+
+  /* Letter spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight:   -0.025em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.025em;
+  --tracking-wider:   0.05em;
+  --tracking-widest:  0.1em;
+
+  /* Weights — Roboto. Product UI uses Regular 400 + Medium 500 + Bold 700; Black 900 reserved for display. */
+  --weight-thin:       100;
+  --weight-extralight: 200;
+  --weight-light:      300;
+  --weight-regular:    400;
+  --weight-medium:     500;
+  --weight-semibold:   600;
+  --weight-bold:       700;
+  --weight-extrabold:  800;
+  --weight-black:      900;
+
+  /* Motion */
+  --ease-out:       cubic-bezier(.16,1,.3,1);   /* @kind other */
+  --ease-standard:  cubic-bezier(.4,0,.2,1);    /* @kind other */
+  --dur-fast:       120ms;                       /* @kind other */
+  --dur-base:       200ms;                       /* @kind other */
+  --dur-slow:       320ms;                       /* @kind other */
+
+  /* ─────── Legacy aliases kept for preview cards / UI kits ─────── */
+  --bg-page:        var(--c-bg-default);
+  --bg-surface:     var(--c-bg-secondary);
+  --bg-surface-2:   var(--c-bg-tertiary);
+  --bg-inverse:     var(--c-bg-inverse-default);
+  --fg-primary:     var(--c-text-primary);
+  --fg-secondary:   var(--c-text-secondary);
+  --fg-tertiary:    var(--c-text-disabled);
+  --fg-on-brand:    var(--c-text-on-brand);
+  --fg-on-inverse:  var(--c-text-primary-inverse);
+  --border-default: var(--c-border-default);
+  --border-strong:  var(--c-border-secondary);
+  --accent:         var(--c-bg-brand-default);
+  --accent-hover:   var(--c-bg-brand-accent);
+  --success:        var(--c-icon-success);
+  --warning:        var(--c-text-warning);
+  --danger:         var(--c-text-error);
+  --info:           var(--c-icon-info);
+  --promo:          var(--c-icon-alternative);
+  --neutral-0:      var(--neutral-50);   /* legacy */
+}
+
+[data-theme="dark"] {
+  /* Background */
+  --c-bg-default:                  #171A1C;
+  --c-bg-secondary:                #252A2D;
+  --c-bg-tertiary:                 #2F3437;
+  --c-bg-inverse-default:          #171A1C;
+  --c-bg-inverse-secondary:        #252A2D;
+  --c-bg-disabled-default:         #171A1C;
+  --c-bg-disabled-secondary:       #171A1C;
+  --c-bg-brand-default:            #9CE800;
+  --c-bg-brand-accent:             #8DC63F;
+  --c-bg-secondary-brand-default:  #FF7A00;
+  --c-bg-secondary-brand-accent:   #CC6200;
+  --c-bg-tertiary-brand-default:   #831AED;
+  --c-bg-inverse-brand-accent:     #3D5904;
+
+  --c-bg-success:                  #3D5904;
+  --c-bg-error:                    #8E2613;
+  --c-bg-error-background:         #F86147;
+  --c-bg-warning:                  #813D00;
+  --c-bg-info:                     #0F6578;
+  --c-bg-alternative:              #4F108E;
+  --c-bg-alert:                    #F86147;
+
+  /* Border */
+  --c-border-default:              #2F3437;
+  --c-border-secondary:            #484F52;
+  --c-border-tertiary:             #252A2D;
+  --c-border-inverse-default:      #2F3437;
+  --c-border-inverse-secondary:    #2F3437;
+  --c-border-accent:               #3D5904;
+  --c-border-success:              #76AC08;
+  --c-border-error:                #B02F17;
+  --c-border-warning:              #CC6200;
+  --c-border-info:                 #1CA4BA;
+  --c-border-alternative:          #831AED;
+
+  /* Text */
+  --c-text-primary:                #FFFFFF;
+  --c-text-secondary:              #AAAEB0;
+  --c-text-disabled:               #484F52;
+  --c-text-primary-inverse:        #FFFFFF;
+  --c-text-secondary-inverse:      #AAAEB0;
+  --c-text-on-brand:               #252A2D;
+  --c-text-error:                  #FFB7AA;
+  --c-text-success:                #76AC08;
+  --c-text-warning:                #FF7A00;
+
+  /* Icon */
+  --c-icon-primary:                #FFFFFF;
+  --c-icon-secondary:              #AAAEB0;
+  --c-icon-error:                  #F86147;
+  --c-icon-warning:                #FF9940;
+  --c-icon-alternative:            #831AED;
+  --c-icon-disabled-on-default:    #2F3437;
+  --c-icon-disabled-on-surface:    #484F52;
+
+  /* Buttons */
+  --c-btn-primary-bg-disabled:     #E4E6E7;
+  --c-btn-secondary-bg-default:    #252A2D;
+  --c-btn-secondary-bg-disabled:   #252A2D;
+  --c-btn-tonal-bg-default:        #2F3437;
+  --c-btn-tonal-bg-hover:          #484F52;
+  --c-btn-tonal-bg-disabled:       #2F3437;
+  --c-btn-outline-default:         #FFFFFF;
+  --c-btn-outline-hover:           #CACDCE;
+  --c-btn-outline-disabled:        #484F52;
+
+  /* Badges */
+  --c-badge-inverse:               #484F52;
+  --c-badge-inverse-secondary:     #2F3437;
+  --c-badge-outline:               #171A1C;
+  --c-badge-outline-border:        #2F3437;
+  --c-badge-secondary:             #484F52;
+  --c-badge-warning:               #FFB366;
+
+  /* Inputs */
+  --c-input-bg:                    #2F3437;       /* neutral-700 */
+  --c-input-bg-disabled:           #252A2D;
+  --c-input-bg-prefix:             #252A2D;
+  --c-input-border-default:        #484F52;
+  --c-input-border-focus:          #4DCDE3;       /* teal-400 — slightly punchier on dark */
+  --c-input-border-error:          #F86147;       /* red-400 */
+  --c-input-border-success:        #B2F42C;       /* brand-400 */
+  --c-input-border-disabled:       #2F3437;
+  --c-input-text:                  #FFFFFF;
+  --c-input-placeholder:           #AAAEB0;
+  --c-input-placeholder-disabled:  #484F52;
+  --c-input-label:                 #FFFFFF;
+  --c-input-help:                  #AAAEB0;
+  --c-input-help-error:            #FFB7AA;
+
+  --c-usp-bg-0:                    #33432800;
+  --c-usp-bg-90:                   #334328E6;
+
+  /* legacy aliases inherit from new layer */
+  --bg-page:        var(--c-bg-default);
+  --bg-surface:     var(--c-bg-secondary);
+  --bg-surface-2:   var(--c-bg-tertiary);
+  --bg-inverse:     var(--c-bg-inverse-default);
+  --fg-primary:     var(--c-text-primary);
+  --fg-secondary:   var(--c-text-secondary);
+  --fg-tertiary:    var(--c-text-disabled);
+  --fg-on-inverse:  var(--c-text-primary-inverse);
+  --border-default: var(--c-border-default);
+  --border-strong:  var(--c-border-secondary);
+}
+
+/* ─── Base styles ─── */
+html, body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  color: var(--c-text-primary);
+  background: var(--c-bg-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Semantic typography utilities ─── */
+.t-display { font-size: var(--text-display); line-height: var(--lh-display); font-weight: 900; letter-spacing: -0.02em; }
+.t-2xl     { font-size: var(--text-2xl); line-height: var(--lh-2xl); font-weight: 700; }
+.t-xxl     { font-size: var(--text-2xl); line-height: var(--lh-2xl); font-weight: 700; }
+.t-xl      { font-size: var(--text-xl);  line-height: var(--lh-xl);  font-weight: 700; }
+.t-lg      { font-size: var(--text-lg);  line-height: var(--lh-lg);  font-weight: 700; }
+.t-base    { font-size: var(--text-base);line-height: var(--lh-base);font-weight: 400; }
+.t-base-b  { font-size: var(--text-base);line-height: var(--lh-base);font-weight: 700; }
+.t-sm      { font-size: var(--text-sm);  line-height: var(--lh-sm);  font-weight: 400; }
+.t-sm-b    { font-size: var(--text-sm);  line-height: var(--lh-sm);  font-weight: 700; }
+.t-xs      { font-size: var(--text-xs);  line-height: var(--lh-xs);  font-weight: 400; }
+.t-xs-b    { font-size: var(--text-xs);  line-height: var(--lh-xs);  font-weight: 700; }
+.t-xxs     { font-size: var(--text-xxs); line-height: var(--lh-xxs); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+.t-link    { color: var(--c-text-primary); text-decoration: underline; text-underline-offset: 2px; }
+.t-link:hover { color: var(--c-text-brand-accent); }
+
+/* ─── Iconography helper ─── */
+/* Usage: <svg class="p-icon"><use href="../assets/icons/sprite.svg#pIcon-Home"/></svg> */
+.p-icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+.p-icon--xs { font-size: 12px; }
+.p-icon--sm { font-size: 16px; }
+.p-icon--md { font-size: 20px; }
+.p-icon--lg { font-size: 24px; }
+.p-icon--xl { font-size: 32px; }

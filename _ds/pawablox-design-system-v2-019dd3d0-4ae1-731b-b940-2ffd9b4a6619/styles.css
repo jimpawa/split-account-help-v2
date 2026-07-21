@@ -1,0 +1,15 @@
+/* ──────────────────────────────────────────────────────────────────
+ * pawabloX Design System — root stylesheet
+ *
+ * This is the SINGLE entry point consuming projects should link.
+ * It pulls in the curated, active token + font layer (colors_and_type.css),
+ * which is the source of truth for brand colors, semantic theme tokens
+ * (light + [data-theme="dark"]), the Roboto @font-face declarations, the
+ * type scale, spacing, radii, and shadows.
+ *
+ * Reference materializations under /reference and /_fig (the raw Figma
+ * Variables dump and the component-library export) are NOT imported here —
+ * they are offline reference only, not the active token closure.
+ * ────────────────────────────────────────────────────────────────── */
+
+@import url('colors_and_type.css');
