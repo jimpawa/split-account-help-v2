@@ -691,6 +691,7 @@ function HelpSheet({ open, onClose }) {
           </div>
         </div>
 
+        <div className="faq-title">Frequently Asked Questions</div>
         <div className="faq-chips">
           {faqCats.map((c) =>
             <button key={c} className={"faq-chip" + (faqCat === c ? " on" : "")} onClick={() => setFaqCat(c)}>{c}</button>)}
