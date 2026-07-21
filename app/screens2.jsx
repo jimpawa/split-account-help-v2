@@ -561,8 +561,7 @@ function HelpSheet({ open, onClose }) {
   const [callOpen, setCallOpen] = useState(false);
   const [view, setView] = useState("root");
   const [faqOpen, setFaqOpen] = useState("pw");
-  const [faqCat, setFaqCat] = useState("All");
-  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); setFaqCat("All"); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
+  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
   useEffect(() => {
     let t;
     if (open) { setRender(true); t = setTimeout(() => setVis(true), 30); }
@@ -609,10 +608,7 @@ function HelpSheet({ open, onClose }) {
       a: ["Your bet is settled according to the official result of the sporting event and the specific market rules you placed your bet on.",
           "Settlement only happens once the outcome is confirmed and announced."] },
   ];
-  const faqCats = ["All", ...FAQS.reduce((acc, f) => acc.includes(f.cat) ? acc : [...acc, f.cat], [])];
-  const faqShown = FAQS
-    .filter((f) => faqCat === "All" || f.cat === faqCat)
-    .sort((a, b) => b.n - a.n);
+  const faqShown = [...FAQS].sort((a, b) => b.n - a.n);
   if (view === "call") return (
     <div className={"acc-scrim" + (vis ? " show" : "")} onClick={onScrim}>
       <div className="acc-sheet help-sheet">
@@ -692,10 +688,6 @@ function HelpSheet({ open, onClose }) {
         </div>
 
         <div className="faq-title">Frequently Asked Questions</div>
-        <div className="faq-chips">
-          {faqCats.map((c) =>
-            <button key={c} className={"faq-chip" + (faqCat === c ? " on" : "")} onClick={() => setFaqCat(c)}>{c}</button>)}
-        </div>
 
         <div className="faq-list">
           {faqShown.map((f, i) =>

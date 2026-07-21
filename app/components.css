@@ -524,11 +524,6 @@
 .hway__sub { font:400 12px/16px Roboto; color:var(--muted); }
 /* FAQ section title */
 .faq-title { font:700 18px/24px Roboto; color:var(--text); }
-/* category chips */
-.faq-chips { display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; }
-.faq-chips::-webkit-scrollbar { height:0; }
-.faq-chip { flex:none; height:36px; padding:0 16px; border-radius:9999px; border:1px solid var(--line); background:var(--bg-chip); color:var(--text); font:700 13px/1 Roboto; white-space:nowrap; cursor:pointer; }
-.faq-chip.on { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
 /* ranked accordion */
 .faq-list { display:flex; flex-direction:column; gap:10px; }
 .faq-item { border:1px solid var(--line); border-radius:14px; background:var(--bg-card); overflow:hidden; }
