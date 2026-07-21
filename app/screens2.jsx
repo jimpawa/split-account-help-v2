@@ -575,7 +575,7 @@ function HelpSheet({ open, onClose }) {
   const helpWays = [
     { id: "chat", ic: "MessageCircle", nm: "Chat with us", sub: "~2 min wait", tone: "accent", act: () => setView("chat") },
     { id: "call", ic: "Headset", nm: "Call Me", sub: "~3 min callback", tone: "accent", act: () => setView("call") },
-    { id: "howto", ic: "ClipboardPen", nm: "How to play", sub: "New to betting?", tone: "plain", act: () => app.toast("How to play") },
+    { id: "rules", ic: "ClipboardPen", nm: "Rules", sub: "How to play", tone: "plain", act: () => app.toast("Rules") },
     { id: "rg", ic: "ShieldCheck", nm: "Responsible Gaming", sub: "Stay in control", tone: "accent", act: () => app.toast("Responsible Gaming") }];
   const reasons = ["Deposit", "Withdrawal", "Betslip", "Other"];
   const canCall = !!reason && phone.trim().length >= 6;
