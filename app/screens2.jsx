@@ -574,7 +574,7 @@ function HelpSheet({ open, onClose }) {
   const onScrim = (e) => { if (e.target === e.currentTarget) onClose(); };
   // "More ways to get help" grid (betPawa contact + info shortcuts).
   const helpWays = [
-    { id: "chat", ic: "MessageCircle", nm: "Live Chat", sub: "~2 min wait", tone: "accent", act: () => setView("chat") },
+    { id: "chat", ic: "MessageCircle", nm: "Chat with us", sub: "~2 min wait", tone: "accent", act: () => setView("chat") },
     { id: "call", ic: "Headset", nm: "Call Me", sub: "~3 min callback", tone: "accent", act: () => setView("call") },
     { id: "rules", ic: "ClipboardPen", nm: "Rules", sub: "Markets & settlement", tone: "plain", act: () => app.toast("Rules") },
     { id: "rg", ic: "ShieldCheck", nm: "Responsible Gaming", sub: "Stay in control", tone: "accent", act: () => app.toast("Responsible Gaming") }];
@@ -681,7 +681,6 @@ function HelpSheet({ open, onClose }) {
         <div className="help-head help-head--smart">
           <div className="help-head__tt">
             <span className="help-head__t">How can we help?</span>
-            <span className="help-head__sub">Smart FAQ — ranked by what’s trending now</span>
           </div>
           <button className="acc-sheet__close" onClick={onClose} aria-label="Close"><Icon name="X" /></button>
         </div>
