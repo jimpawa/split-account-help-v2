@@ -561,7 +561,8 @@ function HelpSheet({ open, onClose }) {
   const [callOpen, setCallOpen] = useState(false);
   const [view, setView] = useState("root");
   const [faqOpen, setFaqOpen] = useState("pw");
-  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
+  const [tab, setTab] = useState("faq");
+  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); setTab("faq"); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
   useEffect(() => {
     let t;
     if (open) { setRender(true); t = setTimeout(() => setVis(true), 30); }
@@ -570,12 +571,10 @@ function HelpSheet({ open, onClose }) {
   }, [open]);
   if (!render) return null;
   const onScrim = (e) => { if (e.target === e.currentTarget) onClose(); };
-  // "More ways to get help" grid (betPawa contact + info shortcuts).
+  // Contact shortcuts at the top of the sheet.
   const helpWays = [
     { id: "chat", ic: "MessageCircle", nm: "Chat with us", sub: "~2 min wait", tone: "accent", act: () => setView("chat") },
-    { id: "call", ic: "Headset", nm: "Call Me", sub: "~3 min callback", tone: "accent", act: () => setView("call") },
-    { id: "rules", ic: "ClipboardPen", nm: "Rules", sub: "How to play", tone: "plain", act: () => app.toast("Rules") },
-    { id: "rg", ic: "ShieldCheck", nm: "Responsible Gaming", sub: "Stay in control", tone: "accent", act: () => app.toast("Responsible Gaming") }];
+    { id: "call", ic: "Headset", nm: "Call Me", sub: "~3 min callback", tone: "accent", act: () => setView("call") }];
   const reasons = ["Deposit", "Withdrawal", "Betslip", "Other"];
   const canCall = !!reason && phone.trim().length >= 6;
   const submit = () => { if (!canCall) return; onClose(); app.toast("We'll call you in 0-5 minutes"); };
@@ -609,6 +608,60 @@ function HelpSheet({ open, onClose }) {
           "Settlement only happens once the outcome is confirmed and announced."] },
   ];
   const faqShown = [...FAQS].sort((a, b) => b.n - a.n);
+
+  // Rules — key betting rules (betpawa.ng/rules).
+  const RULES = [
+    { id: "r-close", q: "When do betting markets close?",
+      a: ["Bets are open until the official start of an event.",
+          "Any bet received after an event has started is cancelled."] },
+    { id: "r-multi", q: "Single & multiple bets",
+      a: ["Singles and multiples are accepted, up to a maximum of 60 selections per betslip."] },
+    { id: "r-void", q: "Void bets & obvious errors",
+      a: ["betPawa may correct obvious errors in odds or results — even after an event.",
+          "Bets affected by errors, or by evidence that an event’s integrity was compromised, may be voided."] },
+    { id: "r-aband", q: "Abandoned matches",
+      a: ["Outcomes that are already decided stand.",
+          "Other single bets are voided and stakes refunded; in a multiple, the abandoned match is removed and the remaining selections stand."] },
+    { id: "r-postpone", q: "Postponed or rescheduled matches",
+      a: ["If a match is rescheduled to within 24 hours of the original kickoff, all bets stand.",
+          "Otherwise, affected bets are voided and stakes refunded."] },
+    { id: "r-90", q: "Regular time (90 minutes)",
+      a: ["Unless stated otherwise, football bets are settled on regular time (90 minutes).",
+          "Extra time and penalties are not included."] },
+    { id: "r-og", q: "Own goals & goalscorers",
+      a: ["A team is credited with a goal even if it was scored by an opposing player (an own goal).",
+          "Own goals do not count towards individual goalscorer markets."] },
+    { id: "r-live", q: "Live betting delay",
+      a: ["Live bets are delayed by up to 10 seconds before they’re accepted.",
+          "A bet is cancelled if it’s placed after the outcome is known or a team has gained a material advantage."] },
+  ];
+
+  // Responsible Gambling (betpawa.ng/responsible-gambling).
+  const RG = [
+    { id: "rg-control", q: "Stay in control",
+      a: ["Treat gambling as a form of entertainment, not a source of income.",
+          "Set affordable daily, weekly or monthly deposit limits — and stick to them."] },
+    { id: "rg-monitor", q: "Monitor your activity",
+      a: ["Review your account statements regularly via the STATEMENT menu to track deposits, withdrawals and betting patterns."] },
+    { id: "rg-signs", q: "Know the warning signs",
+      a: ["Seeing gambling as income, neglecting personal needs, betting beyond your means, hiding your gambling, or repeatedly failing to cut back can all signal a problem."] },
+    { id: "rg-excl", q: "Self-exclusion",
+      a: ["You can close your account temporarily or permanently.",
+          "Permanent exclusion is irreversible — you’ll never be able to access the account again."] },
+    { id: "rg-how", q: "How to self-exclude",
+      a: ["Use the Self-Exclusion tool online, or request a free call and our team will help you close your account."] },
+    { id: "rg-age", q: "18+ only",
+      a: ["You must be at least 18 years old to register.",
+          "Underage accounts are disabled and any winnings are forfeited."] },
+    { id: "rg-support", q: "Get support",
+      a: ["betPawa Support: +234-803-4619602 / +234-902-8040573.",
+          "Tranquil & Quest Behavioral Health (24/7): 09117581454, or WhatsApp 09078884268."] },
+  ];
+
+  const TABS = [{ id: "faq", nm: "FAQ" }, { id: "rules", nm: "Rules" }, { id: "rg", nm: "Responsible Gambling" }];
+  const tabUrl = { faq: "https://www.betpawa.ng/help", rules: "https://www.betpawa.ng/rules", rg: "https://www.betpawa.ng/responsible-gambling" };
+  const activeData = tab === "rules" ? RULES : tab === "rg" ? RG : faqShown;
+
   if (view === "call") return (
     <div className={"acc-scrim" + (vis ? " show" : "")} onClick={onScrim}>
       <div className="acc-sheet help-sheet">
@@ -687,23 +740,26 @@ function HelpSheet({ open, onClose }) {
           </div>
         </div>
 
-        <div className="faq-title">Frequently Asked Questions</div>
+        <div className="htabs">
+          {TABS.map((t) =>
+            <button key={t.id} className={"htab" + (tab === t.id ? " on" : "")} onClick={() => { setTab(t.id); setFaqOpen(null); }}>{t.nm}</button>)}
+        </div>
 
         <div className="faq-list">
-          {faqShown.map((f, i) =>
+          {activeData.map((f, i) =>
             <div className={"faq-item" + (faqOpen === f.id ? " open" : "")} key={f.id}>
               <button className="faq-item__q" onClick={() => setFaqOpen((o) => o === f.id ? null : f.id)} aria-expanded={faqOpen === f.id}>
                 <span className="faq-item__num">{i + 1}</span>
                 <span className="faq-item__main">
                   <span className="faq-item__tx">{f.q}</span>
-                  {i === 0 ? <span className="faq-badge"><Icon name="TrendingUp" size={13} />Most Asked</span> : null}
+                  {tab === "faq" && i === 0 ? <span className="faq-badge"><Icon name="TrendingUp" size={13} />Most Asked</span> : null}
                 </span>
                 <Icon name={faqOpen === f.id ? "ChevronUp" : "ChevronDown"} cls="faq-item__chev" />
               </button>
               {faqOpen === f.id ?
               <div className="faq-item__body">
                 <div className="faq-item__a">{f.a.map((p, j) => <p key={j}>{p}</p>)}</div>
-                <a className="faq-guide" href="https://www.betpawa.ng/help" target="_blank" rel="noopener noreferrer">Open guide<Icon name="ArrowRight" size={16} /></a>
+                <a className="faq-guide" href={tabUrl[tab]} target="_blank" rel="noopener noreferrer">Open guide<Icon name="ArrowRight" size={16} /></a>
               </div> : null}
             </div>)}
         </div>
