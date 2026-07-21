@@ -562,8 +562,7 @@ function HelpSheet({ open, onClose }) {
   const [view, setView] = useState("root");
   const [faqOpen, setFaqOpen] = useState("pw");
   const [faqCat, setFaqCat] = useState("All");
-  const [faqQuery, setFaqQuery] = useState("");
-  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); setFaqCat("All"); setFaqQuery(""); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
+  useEffect(() => { if (!open) { setView("root"); setFaqOpen("pw"); setFaqCat("All"); } else setPhone(app.loggedIn ? "7073457532" : ""); }, [open]);
   useEffect(() => {
     let t;
     if (open) { setRender(true); t = setTimeout(() => setVis(true), 30); }
@@ -611,13 +610,9 @@ function HelpSheet({ open, onClose }) {
           "Settlement only happens once the outcome is confirmed and announced."] },
   ];
   const faqCats = ["All", ...FAQS.reduce((acc, f) => acc.includes(f.cat) ? acc : [...acc, f.cat], [])];
-  const faqQl = faqQuery.trim().toLowerCase();
   const faqShown = FAQS
     .filter((f) => faqCat === "All" || f.cat === faqCat)
-    .filter((f) => !faqQl || f.q.toLowerCase().includes(faqQl) || f.cat.toLowerCase().includes(faqQl) || f.a.join(" ").toLowerCase().includes(faqQl))
     .sort((a, b) => b.n - a.n);
-  const faqMax = faqShown.length ? faqShown[0].n : 1;
-  const fmtN = (n) => n >= 1000 ? Math.round(n / 1000) + "K" : String(n);
   if (view === "call") return (
     <div className={"acc-scrim" + (vis ? " show" : "")} onClick={onScrim}>
       <div className="acc-sheet help-sheet">
@@ -697,29 +692,19 @@ function HelpSheet({ open, onClose }) {
           </div>
         </div>
 
-        <div className="faq-search">
-          <Icon name="Search" cls="faq-search__ic" />
-          <input className="faq-search__in" type="search" placeholder="Search help — e.g. withdrawal, password" value={faqQuery} onChange={(e) => setFaqQuery(e.target.value)} />
-          {faqQuery ? <button className="faq-search__clr" onClick={() => setFaqQuery("")} aria-label="Clear"><Icon name="X" size={16} /></button> : null}
-        </div>
-
         <div className="faq-chips">
           {faqCats.map((c) =>
             <button key={c} className={"faq-chip" + (faqCat === c ? " on" : "")} onClick={() => setFaqCat(c)}>{c}</button>)}
         </div>
 
         <div className="faq-list">
-          {faqShown.length ? faqShown.map((f, i) =>
+          {faqShown.map((f, i) =>
             <div className={"faq-item" + (faqOpen === f.id ? " open" : "")} key={f.id}>
               <button className="faq-item__q" onClick={() => setFaqOpen((o) => o === f.id ? null : f.id)} aria-expanded={faqOpen === f.id}>
                 <span className="faq-item__num">{i + 1}</span>
                 <span className="faq-item__main">
                   <span className="faq-item__tx">{f.q}</span>
-                  <span className="faq-meta">
-                    {i === 0 && !faqQl ? <span className="faq-badge"><Icon name="TrendingUp" size={13} />Most Asked</span> : null}
-                    <span className="faq-trend"><span className="faq-trend__fill" style={{ width: Math.max(8, Math.round(f.n / faqMax * 100)) + "%" }}></span></span>
-                    <span className="faq-trend__n">{fmtN(f.n)}</span>
-                  </span>
+                  {i === 0 ? <span className="faq-badge"><Icon name="TrendingUp" size={13} />Most Asked</span> : null}
                 </span>
                 <Icon name={faqOpen === f.id ? "ChevronUp" : "ChevronDown"} cls="faq-item__chev" />
               </button>
@@ -728,8 +713,12 @@ function HelpSheet({ open, onClose }) {
                 <div className="faq-item__a">{f.a.map((p, j) => <p key={j}>{p}</p>)}</div>
                 <a className="faq-guide" href="https://www.betpawa.ng/help" target="_blank" rel="noopener noreferrer">Open guide<Icon name="ArrowRight" size={16} /></a>
               </div> : null}
-            </div>) :
-          <div className="faq-empty"><Icon name="Search" size={22} /><p>No questions match “{faqQuery}”.</p></div>}
+            </div>)}
+        </div>
+
+        <div className="acc-group help-group">
+          <button className="acc-item" onClick={() => app.toast("About betPawa")}><Icon name="CirlceInfo" cls="acc-item__ic" /><span className="acc-item__lbl">About betPawa</span><Icon name="ChevronRight" cls="acc-item__chev" /></button>
+          <button className="acc-item" onClick={() => app.toast("News")}><Icon name="Megaphone" cls="acc-item__ic" /><span className="acc-item__lbl">News</span><Icon name="ChevronRight" cls="acc-item__chev" /></button>
         </div>
       </div>
     </div>

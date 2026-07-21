@@ -522,13 +522,6 @@
 .hway__ic--plain svg { color:var(--text); }
 .hway__nm { font:700 15px/20px Roboto; color:var(--text); }
 .hway__sub { font:400 12px/16px Roboto; color:var(--muted); }
-/* search */
-.faq-search { display:flex; align-items:center; gap:10px; height:48px; padding:0 14px; border-radius:12px; background:var(--field-bg); border:1px solid var(--field-border); }
-.faq-search__ic { width:20px; height:20px; color:var(--muted); flex:none; }
-.faq-search__in { flex:1; min-width:0; border:0; background:transparent; outline:none; font:400 15px/20px Roboto; color:var(--text); }
-.faq-search__in::placeholder { color:var(--muted); }
-.faq-search__in::-webkit-search-cancel-button { -webkit-appearance:none; appearance:none; }
-.faq-search__clr { width:26px; height:26px; flex:none; border:0; border-radius:9999px; background:var(--bg-chip); color:var(--muted); display:flex; align-items:center; justify-content:center; cursor:pointer; }
 /* category chips */
 .faq-chips { display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; }
 .faq-chips::-webkit-scrollbar { height:0; }
@@ -543,12 +536,8 @@
 .faq-item.open .faq-item__num { color:var(--text); }
 .faq-item__main { flex:1; min-width:0; display:flex; flex-direction:column; gap:10px; }
 .faq-item__tx { font:700 15px/20px Roboto; color:var(--text); }
-.faq-meta { display:flex; align-items:center; gap:10px; }
-.faq-badge { display:inline-flex; align-items:center; gap:5px; flex:none; height:22px; padding:0 9px; border-radius:9999px; background:var(--accent); color:var(--accent-ink); font:700 11px/1 Roboto; letter-spacing:.02em; text-transform:uppercase; }
+.faq-badge { display:inline-flex; align-self:flex-start; align-items:center; gap:5px; flex:none; height:22px; padding:0 9px; border-radius:9999px; background:var(--accent); color:var(--accent-ink); font:700 11px/1 Roboto; letter-spacing:.02em; text-transform:uppercase; }
 .faq-badge svg { width:13px; height:13px; }
-.faq-trend { flex:1; min-width:24px; height:6px; border-radius:9999px; background:var(--field-bg); overflow:hidden; }
-.faq-trend__fill { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,#5B8506,var(--accent)); }
-.faq-trend__n { flex:none; font:700 12px/1 Roboto; color:var(--muted); }
 .faq-item__chev { width:22px; height:22px; flex:none; color:var(--muted); margin-top:2px; }
 .faq-item.open .faq-item__chev { color:var(--accent); }
 .faq-item__body { padding:0 16px 16px 52px; display:flex; flex-direction:column; }
