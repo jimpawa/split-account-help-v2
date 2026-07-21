@@ -681,7 +681,6 @@ function HelpSheet({ open, onClose }) {
         </div>
 
         <div className="hways">
-          <div className="hways__lbl">More ways to get help</div>
           <div className="hways__grid">
             {helpWays.map((w) =>
               <button key={w.id} className="hway" onClick={w.act}>
